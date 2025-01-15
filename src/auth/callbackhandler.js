@@ -4,8 +4,8 @@ import { setAccessToken } from "../utils/spotify";
 
 const CallbackHandler = () => {
   useEffect(() => {
-    const clientId = "a91a2eb5214d447484856f387b24265c"; // Your Client ID
-    const clientSecret = "1f833813b0bc4933b59aa9ef3b1bd9c5"; // Your Client Secret
+    const clientId = "<ClientID>"; // Your Client ID
+    const clientSecret = "<Client Pswrd>"; // Your Client Secret
     const redirectUri = "http://localhost:3000/callback"; // Your Redirect URI
 
     // Extract the authorization code from the URL
