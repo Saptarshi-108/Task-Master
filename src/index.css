@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Define the custom font class */
+.font--1 {
+  font-family: "Rubik Mono One", monospace;
+}
+
+/* White outline and green fill effect */
+.outline-text {
+  color: #4ade80; /* Green fill (Tailwind's lime-300) */
+  text-shadow: -2px -2px 0 #ffffff, /* White outline */ 2px -2px 0 #ffffff,
+    -2px 2px 0 #ffffff, 2px 2px 0 #ffffff;
+}

@@ -1,44 +1,58 @@
 import React, { useState } from "react";
-import "./Todo.css";
 
 const Todo = () => {
-  const [tasks, setTasks] = useState([]); // State for tasks
-  const [taskInput, setTaskInput] = useState(""); // State for input
+  // State to manage the list of tasks
+  const [tasks, setTasks] = useState([]);
+  // State to manage the input value for a new task
+  const [newTask, setNewTask] = useState("");
 
+  // Function to add a new task
   const addTask = () => {
-    if (taskInput.trim()) {
-      setTasks([...tasks, taskInput.trim()]);
-      setTaskInput("");
+    if (newTask.trim() !== "") {
+      setTasks([...tasks, { id: Date.now(), text: newTask }]);
+      setNewTask(""); // Clear the input field
     }
   };
 
-  const removeTask = (index) => {
-    const newTasks = tasks.filter((_, i) => i !== index);
-    setTasks(newTasks);
+  // Function to delete a task
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
   };
 
   return (
-    <div className="todo-container">
-      <div className="todo-header">
-        <h1>Todo</h1>
-      </div>
+    <div className="bg-white p-4 rounded-lg shadow-md">
+      <h2 className="text-xl font-semibold text-gray-700 mb-3">Todo List</h2>
 
-      <div className="addTask">
+      {/* Input field for adding a new task */}
+      <div className="flex gap-2 mb-3">
         <input
           type="text"
-          value={taskInput}
-          placeholder="Add a task..."
-          onChange={(e) => setTaskInput(e.target.value)}
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+          placeholder="Add a new task"
+          className="flex-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-sm"
         />
-        <button onClick={addTask}>Add</button>
+        <button
+          onClick={addTask}
+          className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-sm"
+        >
+          Add
+        </button>
       </div>
 
-      <ul className="task-list">
-        {tasks.map((task, index) => (
-          <li key={index}>
-            {task}{" "}
-            <button onClick={() => removeTask(index)} className="remove-task">
-              Remove
+      {/* Display the list of tasks */}
+      <ul className="space-y-1">
+        {tasks.map((task) => (
+          <li
+            key={task.id}
+            className="flex justify-between items-center p-1 bg-gray-50 rounded-md"
+          >
+            <span className="text-gray-700 text-sm">{task.text}</span>
+            <button
+              onClick={() => deleteTask(task.id)}
+              className="px-2 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 text-sm"
+            >
+              Delete
             </button>
           </li>
         ))}
