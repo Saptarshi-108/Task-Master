@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Add transparency to the features section */
+.features-section {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+/* App.css */
+.full-screen-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.full-screen-toggle:hover {
+  background-color: #00698f;
+}

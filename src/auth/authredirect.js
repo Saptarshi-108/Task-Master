@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 
 const AuthRedirect = () => {
   useEffect(() => {
-    const clientId = "<Client ID>"; // Your Client ID
+    const clientId = "a91a2eb5214d447484856f387b24265c"; // Your Client ID
     const redirectUri = "http://localhost:3000/callback"; // Your Redirect URI
     const scopes = "user-read-private user-read-email"; // Required scopes
 

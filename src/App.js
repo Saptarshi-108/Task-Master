@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Use Routes instead of Switch
+// App.js
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Pomodoro from "./components/pomodoro";
 import MusicPlayer from "./components/MusicPlayer";
 import Todo from "./components/todo";
-import AuthRedirect from "./auth/authredirect"; // Ensure this matches the file name
-import CallbackHandler from "./auth/callbackhandler"; // Ensure this matches the file name
+import AuthRedirect from "./auth/authredirect";
+import CallbackHandler from "./auth/callbackhandler";
 import { setAccessToken, getAccessToken } from "./utils/spotify";
+import FullScreenToggle from "./FullScreenToggle";
 import "./App.css";
 
 const App = () => {
@@ -44,7 +46,7 @@ const App = () => {
                 }}
               >
                 <source
-                  src="cinematography_by_studio_ghibli_1080p.mp4"
+                  src="4K No Copyright Videos _ Motion Graphics _ Background _ Animation _ Video Clips__Jazz_Rain_LoFi.mp4"
                   type="video/mp4"
                 />
                 Your browser does not support the video tag.
@@ -52,14 +54,14 @@ const App = () => {
 
               {/* Header */}
               <h1
-                className="text-4xl font-bold outline-text font--1 mb-2"
+                className="text-6xl font-extrabold font-serif font--2 mb-2"
                 style={{
                   position: "relative",
                   zIndex: 10,
                   textAlign: "center",
                 }}
               >
-                Task Master
+                TaskMaster
               </h1>
 
               {/* Features Section */}
@@ -68,29 +70,16 @@ const App = () => {
                 style={{ position: "relative", zIndex: 10, width: "25%" }}
               >
                 {/* Pomodoro Timer */}
-                <div className="bg-white p-2 rounded-lg shadow-md">
-                  <h2 className="text-lg font-semibold text-gray-700 mb-1">
-                    Pomodoro Timer
-                  </h2>
+                <div className="bg-white p-2 rounded-lg">
                   <Pomodoro />
-                </div>
-
-                {/* Todo List */}
-                <div
-                  className="bg-white p-2 rounded-lg shadow-md"
-                  style={{ maxHeight: "200px", overflowY: "auto" }}
-                >
-                  <h2 className="text-lg font-semibold text-gray-700 mb-1">
-                    Todo List
-                  </h2>
-                  <Todo />
-                </div>
-
-                {/* Music Player */}
-                <div className="bg-white p-2 rounded-lg shadow-md">
-                  <h2 className="text-lg font-semibold text-gray-700 mb-1">
-                    Music Player
-                  </h2>
+                  {/* Todo List */}
+                  <div
+                    className=" bg-slate-300 p-2 "
+                    style={{ maxHeight: "200px", overflowY: "auto" }}
+                  >
+                    <Todo />
+                  </div>
+                  {/* Music Player */}
                   {isAuthenticated ? (
                     <MusicPlayer />
                   ) : (
@@ -103,6 +92,9 @@ const App = () => {
                   )}
                 </div>
               </div>
+
+              {/* Full Screen Toggle */}
+              <FullScreenToggle />
             </div>
           }
         />

@@ -39,8 +39,10 @@ const MusicPlayer = () => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md">
-      <h2 className="text-lg font-semibold text-gray-700 mb-2">Music Player</h2>
+    <div className="bg-slate-300 p-4 shadow-md rounded-b-lg ">
+      <h2 className="text-lg font-semibold text-gray-700 mb-2 font--1 text-center">
+        Music Player
+      </h2>
 
       {/* Search Bar */}
       <div className="flex gap-2 mb-4">

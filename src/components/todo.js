@@ -20,8 +20,10 @@ const Todo = () => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold text-gray-700 mb-3">Todo List</h2>
+    <div className="bg-slate-300 p-4 shadow-md">
+      <h2 className="text-xl font-semibold text-gray-700 mb-3 font--1 text-center">
+        My Tasks
+      </h2>
 
       {/* Input field for adding a new task */}
       <div className="flex gap-2 mb-3">
@@ -30,11 +32,11 @@ const Todo = () => {
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
           placeholder="Add a new task"
-          className="flex-1 p-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-sm"
+          className="flex-1 p-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-md"
         />
         <button
           onClick={addTask}
-          className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-sm"
+          className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-md"
         >
           Add
         </button>
@@ -47,7 +49,7 @@ const Todo = () => {
             key={task.id}
             className="flex justify-between items-center p-1 bg-gray-50 rounded-md"
           >
-            <span className="text-gray-700 text-sm">{task.text}</span>
+            <span className="text-gray-700 text-md">{task.text}</span>
             <button
               onClick={() => deleteTask(task.id)}
               className="px-2 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 text-sm"
