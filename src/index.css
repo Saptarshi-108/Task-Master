@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url("https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap");
 /* Define the custom font class */
 .font--1 {
   font-family: "Oswald", serif;
@@ -14,6 +14,12 @@
   color: #ecfa28;
   text-shadow: 2px 2px 0 #22651a, 2px -2px 0 #ecba24;
 }
+.leckerli-one-regular {
+  font-family: "Leckerli One", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 /* White outline and green fill effect */
 /* .outline-text {
   color: #008fb3; /* Green fill (Tailwind's lime-300) */

@@ -55,19 +55,19 @@ const Pomodoro = () => {
       <div className="space-x-1">
         <button
           onClick={startTimer}
-          className="px-4 py-2 bg-slate-500 text-white rounded hover:bg-sky-300 hover:text-black"
+          className="px-4 py-2 bg-slate-500 text-white rounded hover:bg-sky-300 hover:text-black font-leckerli"
         >
           Start
         </button>
         <button
           onClick={pauseTimer}
-          className="px-4 py-2  bg-slate-500 text-white rounded hover:bg-sky-300 hover:text-black"
+          className="px-4 py-2  bg-slate-500 text-white rounded hover:bg-sky-300 hover:text-black font-leckerli"
         >
           Pause
         </button>
         <button
           onClick={resetTimer}
-          className="px-4 py-2 bg-slate-500 text-white rounded hover:bg-sky-300 hover:text-black"
+          className="px-4 py-2 bg-slate-500 text-white rounded hover:bg-sky-300 hover:text-black font-leckerli"
         >
           Reset
         </button>
@@ -75,13 +75,13 @@ const Pomodoro = () => {
       <div className="mt-6 space-x-3 justify-center items-center">
         <button
           onClick={shortBreak}
-          className="px-4 py-2 bg-slate-500 text-white rounded hover:bg-sky-300 hover:text-black"
+          className="px-4 py-2 bg-slate-500 text-white rounded hover:bg-sky-300 hover:text-black font-leckerli"
         >
           Short Break (5 min)
         </button>
         <button
           onClick={longBreak}
-          className="px-4 py-2 mt-3 bg-slate-500 text-white rounded hover:bg-sky-300 hover:text-black"
+          className="px-4 py-2 mt-3 bg-slate-500 text-white rounded hover:bg-sky-300 hover:text-black font-leckerli"
         >
           Long Break (10 min)
         </button>
