@@ -47,10 +47,10 @@ const FullscreenToggle = () => {
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          <path d="M14 10V4h6" />
-          <path d="M10 14H4v6" />
+          <path d="M9 18H5v-4" />
+          <path d="M21 9v-4h-4" />
           <path d="M3 3l6 6" />
-          <path d="M21 21l-6-6" />
+          <path d="M15 15l6 6" />
         </svg>
       )}
     </button>
