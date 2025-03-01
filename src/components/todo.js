@@ -36,7 +36,7 @@ const Todo = () => {
         />
         <button
           onClick={addTask}
-          className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-md font-leckerli"
+          className="px-3 py-1 bg-slate-500 text-white rounded-md hover:bg-blue-600 text-md font-leckerli"
         >
           Add
         </button>
@@ -47,7 +47,7 @@ const Todo = () => {
         {tasks.map((task) => (
           <li
             key={task.id}
-            className="flex justify-between items-center p-1 bg-gray-50 rounded-md font-leckerli"
+            className="flex justify-between items-center p-1 bg-gray-50 rounded-md "
           >
             <span className="text-gray-700 text-md">{task.text}</span>
             <button

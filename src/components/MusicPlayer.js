@@ -40,7 +40,7 @@ const MusicPlayer = () => {
 
   return (
     <div className="bg-slate-300 p-4 shadow-md rounded-b-lg ">
-      <h2 className="text-lg font-semibold text-gray-700 mb-2 font--1 text-center">
+      <h2 className="text-lg font-semibold text-gray-700 mb-2 font--1 text-center font-leckerli">
         Music Player
       </h2>
 
