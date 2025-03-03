@@ -54,7 +54,11 @@ const MusicPlayer = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div className="p-2 bg-slate-500 text-white rounded-lg overflow-y-auto bg-opacity-60">
+=======
+    <div className="p-2 bg-slate-500 text-white rounded-lg overflow-y-auto ">
+>>>>>>> 87ee8fe9075bcb6c399ffc4accccc18e4cce9a6d
       <h2 className="text-xl font-bold mb-2 font-leckerli text-center ">
         Music
       </h2>

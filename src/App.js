@@ -7,6 +7,7 @@ import FullScreenToggle from "./FullScreenToggle";
 import "./App.css";
 
 const App = () => {
+<<<<<<< HEAD
   // Corrected video list
   const vidList = [
     "video1.mp4",
@@ -27,6 +28,8 @@ const App = () => {
     const randomVid = vidList[Math.floor(Math.random() * vidList.length)];
     setVidSrc(randomVid);
   };
+=======
+>>>>>>> 87ee8fe9075bcb6c399ffc4accccc18e4cce9a6d
   return (
     <Router>
       <Routes>
@@ -100,16 +103,23 @@ const App = () => {
                   <Pomodoro />
                   {/* Todo List */}
                   <div
+<<<<<<< HEAD
                     className=" bg-slate-300 p-2 bg-opacity-50 "
+=======
+                    className=" bg-slate-300 p-2 "
+>>>>>>> 87ee8fe9075bcb6c399ffc4accccc18e4cce9a6d
                     style={{ maxHeight: "150px", overflowY: "auto" }}
                   >
                     <Todo />
                   </div>
                   {/* Music Player */}
                   <MusicPlayer />
+<<<<<<< HEAD
                   <div className="bg-slate-300  p-2 font--1 rounded-lg font-semibold bg-opacity-80">
                     Made with ❤️ by Saptarshi.
                   </div>
+=======
+>>>>>>> 87ee8fe9075bcb6c399ffc4accccc18e4cce9a6d
                 </div>
               </div>
 
