@@ -50,13 +50,8 @@ const Pomodoro = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="mx-auto mt-0 p-3 bg-slate-300 shadow-lg rounded-t-lg text-center bg-opacity-70">
-      <div className="text-4xl font-mono mb-6 font-bold text-white bg-zinc-700 rounded-3xl w-40 m-auto">
-=======
     <div className="mx-auto mt-0 p-3 bg-slate-300 shadow-lg rounded-t-lg text-center">
       <div className="text-4xl font-mono mb-6 font-bold">
->>>>>>> 87ee8fe9075bcb6c399ffc4accccc18e4cce9a6d
         {formatTime(time)}
       </div>
       <div className="space-x-1">
@@ -68,7 +63,7 @@ const Pomodoro = () => {
         </button>
         <button
           onClick={pauseTimer}
-          className="px-4 py-2  bg-slate-500 text-white rounded hover:bg-sky-300 hover:text-black font-leckerli delay-100"
+          className="px-4 py-2 bg-slate-500 text-white rounded hover:bg-sky-300 hover:text-black font-leckerli delay-100"
         >
           Pause
         </button>
