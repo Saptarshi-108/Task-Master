@@ -1,57 +1,83 @@
-// App.js
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Pomodoro from "./components/pomodoro";
 import MusicPlayer from "./components/MusicPlayer";
 import Todo from "./components/todo";
-import AuthRedirect from "./auth/authredirect";
-import CallbackHandler from "./auth/callbackhandler";
-import { setAccessToken, getAccessToken } from "./utils/spotify";
 import FullScreenToggle from "./FullScreenToggle";
 import "./App.css";
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // Corrected video list
+  const vidList = [
+    "video1.mp4",
+    "video2.mp4",
+    "video3.mp4",
+    "img1.jpg",
+    "img2.jpg",
+    "img3.jpg",
+    "img4.jpg",
+    "img5.jpg",
+    "img6.jpg",
+    "img7.jpg",
+  ];
+  const [vidSrc, setVidSrc] = useState(vidList[0]);
 
-  // Check if the user is authenticated (has an access token)
-  useEffect(() => {
-    const token = getAccessToken();
-    if (token) {
-      setAccessToken(token);
-      setIsAuthenticated(true);
-    }
-  }, []);
-
+  // Corrected function to change video
+  const changeVid = () => {
+    const randomVid = vidList[Math.floor(Math.random() * vidList.length)];
+    setVidSrc(randomVid);
+  };
   return (
     <Router>
       <Routes>
-        {/* Home Page */}
         <Route
           path="/"
           element={
             <div className="min-h-screen bg-gray-100 p-2 relative">
-              {/* Background Video */}
-              <video
-                autoPlay
-                loop
-                muted
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  zIndex: 0,
-                }}
-              >
-                <source
-                  src="4K No Copyright Videos _ Motion Graphics _ Background _ Animation _ Video Clips__Jazz_Rain_LoFi.mp4"
-                  type="video/mp4"
+              {/* Background Video or Image*/}
+              {vidSrc.endsWith(".mp4") ? (
+                <video
+                  key={vidSrc}
+                  autoPlay
+                  loop
+                  muted
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    zIndex: 0,
+                  }}
+                >
+                  <source src={vidSrc} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <img
+                  src={vidSrc}
+                  alt="Background"
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    zIndex: 0,
+                  }}
                 />
-                Your browser does not support the video tag.
-              </video>
+              )}
 
+              {/* Change Video Button */}
+              <button
+                onClick={changeVid}
+                className="absolute top-4 right-4 bg-gray-300 px-4 py-2 rounded-lg z-20 hover:bg-slate-400"
+                style={{ zIndex: 20 }}
+              >
+                <img src="loading-arrow.png" className="h-4 w-4 "></img>
+              </button>
               {/* Header */}
               <h1
                 className="text-6xl font-extrabold font-serif font--2 mb-2"
@@ -66,30 +92,24 @@ const App = () => {
 
               {/* Features Section */}
               <div
-                className="flex flex-col gap-2 ml-2"
+                className="flex flex-col gap-2 ml-2 bottom-10 "
                 style={{ position: "relative", zIndex: 10, width: "25%" }}
               >
                 {/* Pomodoro Timer */}
-                <div className="bg-white p-2 rounded-lg">
+                <div className="bg-neutral-600 p-2.5 rounded-lg bg-opacity-70">
                   <Pomodoro />
                   {/* Todo List */}
                   <div
-                    className=" bg-slate-300 p-2 "
-                    style={{ maxHeight: "200px", overflowY: "auto" }}
+                    className=" bg-slate-300 p-2 bg-opacity-50 "
+                    style={{ maxHeight: "150px", overflowY: "auto" }}
                   >
                     <Todo />
                   </div>
                   {/* Music Player */}
-                  {isAuthenticated ? (
-                    <MusicPlayer />
-                  ) : (
-                    <button
-                      onClick={() => (window.location.href = "/auth")}
-                      className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
-                    >
-                      Login with Spotify
-                    </button>
-                  )}
+                  <MusicPlayer />
+                  <div className="bg-slate-300  p-2 font--1 rounded-lg font-semibold bg-opacity-80">
+                    Made with ❤️ by Saptarshi.
+                  </div>
                 </div>
               </div>
 
@@ -98,12 +118,6 @@ const App = () => {
             </div>
           }
         />
-
-        {/* Redirect to Spotify Authorization Page */}
-        <Route path="/auth" element={<AuthRedirect />} />
-
-        {/* Handle Spotify Callback */}
-        <Route path="/callback" element={<CallbackHandler />} />
       </Routes>
     </Router>
   );

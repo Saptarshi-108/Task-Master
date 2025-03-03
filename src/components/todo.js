@@ -20,7 +20,7 @@ const Todo = () => {
   };
 
   return (
-    <div className="bg-slate-300 p-4 shadow-md">
+    <div className="bg-slate-300 p-4 shadow-md bg-opacity-50">
       <h2 className="text-xl font-semibold text-gray-700 mb-3 font--1 text-center font-leckerli">
         My Tasks
       </h2>
@@ -32,7 +32,7 @@ const Todo = () => {
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
           placeholder="Add a new task"
-          className="flex-1 p-2 border-gray-300 rounded-md focus:outline-none focus:border-zinc text-md "
+          className="flex-1 p-2 border-gray-300 rounded-md focus:outline-none focus:border-zinc text-md font-semibold font--1 "
         />
         <button
           onClick={addTask}
@@ -47,7 +47,7 @@ const Todo = () => {
         {tasks.map((task) => (
           <li
             key={task.id}
-            className="flex justify-between items-center p-1 bg-gray-50 rounded-md "
+            className="flex justify-between items-center p-1 bg-gray-50 rounded-md font-semibold font--1 "
           >
             <span className="text-gray-700 text-md">{task.text}</span>
             <button
