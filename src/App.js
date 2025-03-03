@@ -1,17 +1,12 @@
-// App.js
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Pomodoro from "./components/pomodoro";
 import MusicPlayer from "./components/MusicPlayer";
 import Todo from "./components/todo";
-import AuthRedirect from "./auth/authredirect";
-import CallbackHandler from "./auth/callbackhandler";
-import { setAccessToken, getAccessToken } from "./utils/spotify";
 import FullScreenToggle from "./FullScreenToggle";
 import "./App.css";
 
 const App = () => {
-<<<<<<< HEAD
   // Corrected video list
   const vidList = [
     "video1.mp4",
@@ -20,10 +15,6 @@ const App = () => {
     "img1.jpg",
     "img2.jpg",
     "img3.jpg",
-    "img4.jpg",
-    "img5.jpg",
-    "img6.jpg",
-    "img7.jpg",
   ];
   const [vidSrc, setVidSrc] = useState(vidList[0]);
 
@@ -32,23 +23,9 @@ const App = () => {
     const randomVid = vidList[Math.floor(Math.random() * vidList.length)];
     setVidSrc(randomVid);
   };
-=======
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // Check if the user is authenticated (has an access token)
-  useEffect(() => {
-    const token = getAccessToken();
-    if (token) {
-      setAccessToken(token);
-      setIsAuthenticated(true);
-    }
-  }, []);
-
->>>>>>> parent of 87ee8fe (last update before deploying.)
   return (
     <Router>
       <Routes>
-        {/* Home Page */}
         <Route
           path="/"
           element={
@@ -92,10 +69,14 @@ const App = () => {
               {/* Change Video Button */}
               <button
                 onClick={changeVid}
-                className="absolute top-4 right-4 bg-gray-300 px-4 py-2 rounded-lg z-20 hover:bg-slate-400"
+                className="absolute top-4 right-4 bg-zinc-300 text-white px-4 py-2 rounded-lg hover:bg-zinc-"
                 style={{ zIndex: 20 }}
               >
-                <img src="loading-arrow.png" className="h-4 w-4 "></img>
+                <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB90lEQVR4nO2ZO0rEUBSGP4U5YqMLcOwtdBF27sDSLVi7BhuXYC/IgDM2dvYWLsFCGAsbGxH0ykAGQphHbnLuI5nzw2WaOyHfl/s4yQWLxWLRjwD3gCvaBNhhQ+HdJkmQJfAbIUHWwPdagtSE76UE8YTvlQRpCN8LCdISvtMSBBitAXsADoBhAbmq76i4Zm/gXQE+z2GN/p2QIDXhmwjIXoJ4wM/n9rCAf/T4X5YSRGnB6+TCKJHhs5IgieCzkCCJ4ZNKkEzgk0iQzOCjSxgpVXja/Vxxb8HjlAoc7X7zZgJST4FJzQpPu1+0KTDIdBEcx9wJBplJiAqfm4Qk8LlIKMPvAS8Nr/MBnBDpNdgptfJr8ez3qeX1pl0aCePSk98CbpWu2yriORJ8KrxlT36Wa0Wxnfskdqk8sjr1UfQc+M1RQF0JvhVeGf4U+FaGVxWguTBW9/lj4DMAvLoADQlV+NmIeQsEH0RAGwlV+H3gNSB8MAFNJFThd4HnwPBBBfhIqMJvA3cR4IMLqCNh0YvNTST4KAJWbZGLjryuIlSW0QUskrAI/gL487j5JpVlMgHrcgb8eN58rwR8Nbj5pqfNWQpwiVo2cSYAGwHOpgC2BjhbBLFdwNk2iNUBzgohNqsSnCbYAlsdjWnnCHiPCN/qcNRisVjoa/4BsKo5LvKKZRwAAAAASUVORK5CYII="
+                  alt="dice-cubes"
+                  className="h-5 w-5 "
+                />
               </button>
               {/* Header */}
               <h1
@@ -111,42 +92,21 @@ const App = () => {
 
               {/* Features Section */}
               <div
-                className="flex flex-col gap-2 ml-2 bottom-10 "
+                className="flex flex-col gap-2 ml-2"
                 style={{ position: "relative", zIndex: 10, width: "25%" }}
               >
                 {/* Pomodoro Timer */}
-                <div className="bg-neutral-600 p-2.5 rounded-lg bg-opacity-70">
+                <div className="bg-white p-2 rounded-lg bg-gray-600 bg-opacity-70">
                   <Pomodoro />
                   {/* Todo List */}
                   <div
-<<<<<<< HEAD
-                    className=" bg-slate-300 p-2 bg-opacity-50 "
+                    className=" bg-slate-300 p-2 bg-opacity-70"
                     style={{ maxHeight: "150px", overflowY: "auto" }}
-=======
-                    className=" bg-slate-300 p-2 "
-                    style={{ maxHeight: "200px", overflowY: "auto" }}
->>>>>>> parent of 87ee8fe (last update before deploying.)
                   >
                     <Todo />
                   </div>
                   {/* Music Player */}
-<<<<<<< HEAD
                   <MusicPlayer />
-                  <div className="bg-slate-300  p-2 font--1 rounded-lg font-semibold bg-opacity-80">
-                    Made with ❤️ by Saptarshi.
-                  </div>
-=======
-                  {isAuthenticated ? (
-                    <MusicPlayer />
-                  ) : (
-                    <button
-                      onClick={() => (window.location.href = "/auth")}
-                      className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
-                    >
-                      Login with Spotify
-                    </button>
-                  )}
->>>>>>> parent of 87ee8fe (last update before deploying.)
                 </div>
               </div>
 
@@ -155,12 +115,6 @@ const App = () => {
             </div>
           }
         />
-
-        {/* Redirect to Spotify Authorization Page */}
-        <Route path="/auth" element={<AuthRedirect />} />
-
-        {/* Handle Spotify Callback */}
-        <Route path="/callback" element={<CallbackHandler />} />
       </Routes>
     </Router>
   );

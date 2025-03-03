@@ -50,8 +50,10 @@ const Pomodoro = () => {
   };
 
   return (
-    <div className="mx-auto mt-0 p-3 bg-slate-300 shadow-lg rounded-t-lg text-center">
-      <div className="text-4xl font-mono mb-6">{formatTime(time)}</div>
+    <div className="mx-auto mt-1 p-0.5 bg-slate-300 shadow-lg rounded-t-lg text-center bg-opacity-70 ">
+      <div className="text-5xl font-mono mb-2 bg-gray-700 text-yellow-300 m-auto w-40 rounded-xl top-4 mt-2 ">
+        {formatTime(time)}
+      </div>
       <div className="space-x-1">
         <button
           onClick={startTimer}
