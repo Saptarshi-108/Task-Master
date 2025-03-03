@@ -1,12 +1,17 @@
+// App.js
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Pomodoro from "./components/pomodoro";
 import MusicPlayer from "./components/MusicPlayer";
 import Todo from "./components/todo";
+import AuthRedirect from "./auth/authredirect";
+import CallbackHandler from "./auth/callbackhandler";
+import { setAccessToken, getAccessToken } from "./utils/spotify";
 import FullScreenToggle from "./FullScreenToggle";
 import "./App.css";
 
 const App = () => {
+<<<<<<< HEAD
   // Corrected video list
   const vidList = [
     "video1.mp4",
@@ -27,9 +32,23 @@ const App = () => {
     const randomVid = vidList[Math.floor(Math.random() * vidList.length)];
     setVidSrc(randomVid);
   };
+=======
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Check if the user is authenticated (has an access token)
+  useEffect(() => {
+    const token = getAccessToken();
+    if (token) {
+      setAccessToken(token);
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+>>>>>>> parent of 87ee8fe (last update before deploying.)
   return (
     <Router>
       <Routes>
+        {/* Home Page */}
         <Route
           path="/"
           element={
@@ -100,16 +119,34 @@ const App = () => {
                   <Pomodoro />
                   {/* Todo List */}
                   <div
+<<<<<<< HEAD
                     className=" bg-slate-300 p-2 bg-opacity-50 "
                     style={{ maxHeight: "150px", overflowY: "auto" }}
+=======
+                    className=" bg-slate-300 p-2 "
+                    style={{ maxHeight: "200px", overflowY: "auto" }}
+>>>>>>> parent of 87ee8fe (last update before deploying.)
                   >
                     <Todo />
                   </div>
                   {/* Music Player */}
+<<<<<<< HEAD
                   <MusicPlayer />
                   <div className="bg-slate-300  p-2 font--1 rounded-lg font-semibold bg-opacity-80">
                     Made with ❤️ by Saptarshi.
                   </div>
+=======
+                  {isAuthenticated ? (
+                    <MusicPlayer />
+                  ) : (
+                    <button
+                      onClick={() => (window.location.href = "/auth")}
+                      className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+                    >
+                      Login with Spotify
+                    </button>
+                  )}
+>>>>>>> parent of 87ee8fe (last update before deploying.)
                 </div>
               </div>
 
@@ -118,6 +155,12 @@ const App = () => {
             </div>
           }
         />
+
+        {/* Redirect to Spotify Authorization Page */}
+        <Route path="/auth" element={<AuthRedirect />} />
+
+        {/* Handle Spotify Callback */}
+        <Route path="/callback" element={<CallbackHandler />} />
       </Routes>
     </Router>
   );

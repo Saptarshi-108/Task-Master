@@ -39,12 +39,15 @@ const MusicPlayer = () => {
   };
 
   return (
+<<<<<<< HEAD
 <div className="p-2 bg-slate-500 text-white rounded-lg overflow-y-auto bg-opacity-60">
 
     <div className="p-2 bg-slate-500 text-white rounded-lg overflow-y-auto ">
 
       <h2 className="text-xl font-bold mb-2 font-leckerli text-center ">
         Music</h2>
+=======
+>>>>>>> parent of 87ee8fe (last update before deploying.)
     <div className="bg-slate-300 p-4 shadow-md rounded-b-lg ">
       <h2 className="text-lg font-semibold text-gray-700 mb-2 font--1 text-center font-leckerli">
         Music Player
