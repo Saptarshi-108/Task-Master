@@ -1,31 +1,15 @@
-// App.js
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Pomodoro from "./components/pomodoro";
 import MusicPlayer from "./components/MusicPlayer";
 import Todo from "./components/todo";
-import AuthRedirect from "./auth/authredirect";
-import CallbackHandler from "./auth/callbackhandler";
-import { setAccessToken, getAccessToken } from "./utils/spotify";
 import FullScreenToggle from "./FullScreenToggle";
 import "./App.css";
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // Check if the user is authenticated (has an access token)
-  useEffect(() => {
-    const token = getAccessToken();
-    if (token) {
-      setAccessToken(token);
-      setIsAuthenticated(true);
-    }
-  }, []);
-
   return (
     <Router>
       <Routes>
-        {/* Home Page */}
         <Route
           path="/"
           element={
@@ -75,21 +59,12 @@ const App = () => {
                   {/* Todo List */}
                   <div
                     className=" bg-slate-300 p-2 "
-                    style={{ maxHeight: "200px", overflowY: "auto" }}
+                    style={{ maxHeight: "150px", overflowY: "auto" }}
                   >
                     <Todo />
                   </div>
                   {/* Music Player */}
-                  {isAuthenticated ? (
-                    <MusicPlayer />
-                  ) : (
-                    <button
-                      onClick={() => (window.location.href = "/auth")}
-                      className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
-                    >
-                      Login with Spotify
-                    </button>
-                  )}
+                  <MusicPlayer />
                 </div>
               </div>
 
@@ -98,12 +73,6 @@ const App = () => {
             </div>
           }
         />
-
-        {/* Redirect to Spotify Authorization Page */}
-        <Route path="/auth" element={<AuthRedirect />} />
-
-        {/* Handle Spotify Callback */}
-        <Route path="/callback" element={<CallbackHandler />} />
       </Routes>
     </Router>
   );

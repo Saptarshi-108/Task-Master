@@ -1,118 +1,101 @@
 import React, { useState, useEffect } from "react";
-import { setAccessToken, searchTracks, getTrack } from "../utils/spotify";
+
+const PLAYLIST_ID = "4ssbdKJUpahZGXTB4x8Teh"; // Task-Master playlist ID
+const SPOTIFY_API_URL = `https://api.spotify.com/v1/playlists/${PLAYLIST_ID}`;
+const EMBED_URL = `https://open.spotify.com/embed/playlist/${PLAYLIST_ID}?utm_source=generator`;
+const ACCESS_TOKEN =
+  "BQCxCMltlk01h7agA58QIQ7pNtvBUkOrz6ZdhGP63BkD4FvQ8AKXhhWsz-zCBxERaq03T4bMu7xGfsphBLymNbrqlvRJsskglElHetx0EbQXAhpTbx4ffuqpN6y-VzpMc6ErWcmqUro"; // Replace with a valid token
 
 const MusicPlayer = () => {
-  const [query, setQuery] = useState(""); // State for search query
-  const [tracks, setTracks] = useState([]); // State for search results
-  const [selectedTrack, setSelectedTrack] = useState(null); // State for selected track
-  const [isPlaying, setIsPlaying] = useState(false); // State to track if audio is playing
+  const [tracks, setTracks] = useState([]);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
 
-  // Set your Spotify access token (replace with your token)
+  // Fetch playlist details
   useEffect(() => {
-    const accessToken = ""; // Replace with your token
-    setAccessToken(accessToken);
+    const fetchPlaylist = async () => {
+      try {
+        const response = await fetch(SPOTIFY_API_URL, {
+          headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
+        });
+        if (!response.ok) throw new Error("Failed to fetch playlist");
+
+        const data = await response.json();
+        const songList = data.tracks.items.map((item) => ({
+          name: item.track.name,
+          artist: item.track.artists.map((artist) => artist.name).join(", "),
+          preview_url: item.track.preview_url,
+        }));
+
+        setTracks(songList);
+      } catch (error) {
+        console.error("Error fetching playlist:", error);
+      }
+    };
+
+    fetchPlaylist();
   }, []);
 
-  // Handle search
-  const handleSearch = async () => {
-    if (query.trim() === "") return;
-    const results = await searchTracks(query);
-    setTracks(results);
-  };
-
-  // Handle track selection
-  const handleTrackSelect = async (trackId) => {
-    const track = await getTrack(trackId);
-    setSelectedTrack(track);
-    setIsPlaying(true); // Automatically play the selected track
-  };
-
-  // Handle play/pause
-  const togglePlay = () => {
-    const audio = document.getElementById("audio");
-    if (isPlaying) {
-      audio.pause();
-    } else {
-      audio.play();
+  // Handle Play/Pause
+  const handlePlayPause = () => {
+    const audio = document.getElementById("audio-player");
+    if (audio) {
+      audio.paused ? audio.play() : audio.pause();
     }
-    setIsPlaying(!isPlaying);
+  };
+
+  // Play Next Song
+  const playNext = () => {
+    setCurrentTrackIndex((prev) => (prev + 1) % tracks.length);
+  };
+
+  // Play Previous Song
+  const playPrevious = () => {
+    setCurrentTrackIndex((prev) => (prev - 1 + tracks.length) % tracks.length);
   };
 
   return (
-    <div className="bg-slate-300 p-4 shadow-md rounded-b-lg ">
-      <h2 className="text-lg font-semibold text-gray-700 mb-2 font--1 text-center font-leckerli">
-        Music Player
+    <div className="p-2 bg-slate-500 text-white rounded-lg overflow-y-auto ">
+      <h2 className="text-xl font-bold mb-2 font-leckerli text-center ">
+        Music
       </h2>
 
-      {/* Search Bar */}
-      <div className="flex gap-2 mb-4">
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search for a song..."
-          className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 "
-        />
-        <button
-          onClick={handleSearch}
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 font-leckerli"
-        >
-          Search
-        </button>
-      </div>
+      {/* Spotify Embed Player */}
+      <iframe
+        style={{ borderRadius: "12px" }}
+        src={EMBED_URL}
+        width="100%"
+        height="100"
+        frameBorder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      ></iframe>
 
-      {/* Search Results */}
-      <div className="space-y-2">
-        {tracks.map((track) => (
-          <div
-            key={track.id}
-            className="flex items-center justify-between p-2 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100"
-            onClick={() => handleTrackSelect(track.id)}
+      {/* Song List */}
+      <ul className="mt-4">
+        {tracks.map((track, index) => (
+          <li
+            key={index}
+            className={`p-2 ${
+              index === currentTrackIndex ? "bg-gray-300" : ""
+            }`}
+            onClick={() => setCurrentTrackIndex(index)}
           >
-            <div className="flex items-center gap-2">
-              <img
-                src={track.album.images[0]?.url}
-                alt={track.name}
-                className="w-10 h-10 rounded-lg"
-              />
-              <div>
-                <p className="text-sm font-semibold text-gray-700">
-                  {track.name}
-                </p>
-                <p className="text-xs text-gray-500">
-                  {track.artists.map((artist) => artist.name).join(", ")}
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={() => handleTrackSelect(track.id)}
-              className="px-2 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600"
-            >
-              Play
-            </button>
-          </div>
+            {track.name} - {track.artist}
+          </li>
         ))}
-      </div>
+      </ul>
 
-      {/* Selected Track Details */}
-      {selectedTrack && (
-        <div className="mt-4 p-2 border-t border-gray-300">
-          <h3 className="text-lg font-semibold">Now Playing:</h3>
-          <p className="text-sm">
-            {selectedTrack.name} by{" "}
-            {selectedTrack.artists.map((artist) => artist.name).join(", ")}
-          </p>
-          <div className="flex items-center gap-2 mt-2">
-            <button
-              onClick={togglePlay}
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-            >
-              {isPlaying ? "Pause" : "Play"}
-            </button>
-            <audio id="audio" controls>
-              <source src={selectedTrack.preview_url} type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
+      {/* Audio Controls */}
+      {tracks.length > 0 && tracks[currentTrackIndex].preview_url && (
+        <div className="mt-4">
+          <audio
+            id="audio-player"
+            src={tracks[currentTrackIndex].preview_url}
+          />
+          <div className="flex gap-2">
+            <button onClick={playPrevious}>Prev</button>
+            <button onClick={handlePlayPause}>Play/Pause</button>
+            <button onClick={playNext}>Next</button>
           </div>
         </div>
       )}
